@@ -7,15 +7,16 @@ export default class OrgsList extends React.Component {
   }
 
   render() {
-    var orgNodes = this.props.children.map((org) => {
+    var orgNodes = Object.keys(this.props.orgs).map((login) => {
+      var orgAndRepos = this.props.orgs[login];
       return (
-        <div><img height="20" width="20" src={org.avatar_url}/>{org.login}</div>
+        <a className="menu-item" key={login}><img className="avatar avatar-small" width="20" height="20" src={orgAndRepos.org.avatar_url} />{login}</a>
       );
     })
     return (
-      <div>
+      <nav className="menu">
         {orgNodes}
-      </div>
+      </nav>
     );
   }
 }
