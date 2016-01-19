@@ -1,0 +1,21 @@
+{
+  "name": "pr-dashboard",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cb372/pr-dashboard",
+  "authors": [
+    "Chris Birchall"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "primer-css": "~2.5.0"
+  }
+}

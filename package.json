@@ -20,8 +20,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "build": "cp ./src/index.html ./dist/index.html; webpack ./src/js/app.js ./dist/js/app.js --config ./webpack.conf.js",
-    "start": "cp ./src/index.html ./dist/index.html; webpack-dev-server --config ./webpack.conf.js --content-base ./dist/",
+    "build": "scripts/build.sh",
+    "start": "scripts/start.sh",
     "clean": "rm -r ./dist"
   }
 }
