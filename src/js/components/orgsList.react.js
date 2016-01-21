@@ -3,7 +3,6 @@ import React from 'react';
 export default class OrgsList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   totalOpenPRs(repos) {
@@ -20,8 +19,14 @@ export default class OrgsList extends React.Component {
   render() {
     var orgNodes = Object.keys(this.props.orgs).map((login) => {
       var orgAndRepos = this.props.orgs[login];
+      var cssClass;
+      if (this.props.selectedOrg === login)
+        cssClass = 'menu-item selected';
+      else
+        cssClass = 'menu-item';
+
       return (
-        <a className="menu-item" key={login}><img className="avatar avatar-small" width="20" height="20" src={orgAndRepos.org.avatar_url} />
+        <a href="#" className={cssClass} key={login} onClick={() => this.props.onSelect(login)}><img className="avatar avatar-small" width="20" height="20" src={orgAndRepos.org.avatar_url} />
           <span className="counter">{this.totalOpenPRs(orgAndRepos.repos)}</span>
           {login}
         </a>

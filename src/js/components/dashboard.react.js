@@ -1,13 +1,18 @@
 import React from 'react';
 import OrgsList from './orgsList.react.js';
+import RepoList from './repoList.react.js';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = { 
       orgs: {},
+      selectedOrg: '',
       loadingRepos: true
     };
+
+    this.setSelectedOrg = this.setSelectedOrg.bind(this);
   }
 
   componentDidMount() {
@@ -70,16 +75,34 @@ export default class Dashboard extends React.Component {
     orgs;
   }
 
+  setSelectedOrg(login) {
+    this.setState({ selectedOrg: login });
+  }
+
   render() {
+    var t = this;
+    var repoList;
+    var selectedOrg = this.state.orgs[this.state.selectedOrg];
+    if (selectedOrg) {
+      repoList = <RepoList repos={selectedOrg.repos} />
+    } else {
+      repoList = (
+        <div className="blankslate has-fixed-width">
+          <h3>No organization selected</h3>
+          <p>Select an organization from the menu on the left to see your open PRs.</p>
+        </div>
+      );
+    }
+
     return (
       <div>
         <div>TODO filters go here</div>
         <div className="columns">
           <div className="one-fifth column">
-            <OrgsList github={this.props.github} orgs={this.state.orgs} loadingRepos={this.state.loadingRepos} />
+            <OrgsList orgs={this.state.orgs} selectedOrg={this.state.selectedOrg} onSelect={t.setSelectedOrg} loadingRepos={this.state.loadingRepos} />
           </div>
           <div className="four-fifths column">
-            TODO repo list goes here
+            {repoList}
           </div>
         </div>    
       </div>
